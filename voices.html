@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Lens: Bloomington</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --cream: #FFF8F3;
+      --terracotta: #E2725B;
+      --sage: #B7C4A1;
+      --accent: #A0522D;
+      --text-dark: #3E2C23;
+      --nav-bg: #F5E6DC;
+      --soft-bg: #F9F5F0;
+    }
+    body {
+      margin: 0;
+      font-family: 'Garamond', serif;
+      background: linear-gradient(120deg, var(--soft-bg) 70%, var(--sage) 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--nav-bg);
+      text-align: center;
+      padding: 1.5rem 0 1rem 0;
+      box-shadow: 0 2px 8px rgba(226, 114, 91, 0.06);
+      position: relative;
+      z-index: 2;
+    }
+    h1, h2, h3, h4, h5, h6, nav {
+      font-family: 'Georgia', serif;
+    }
+    h1 {
+      margin: 0;
+      font-family: 'Garamond', serif;
+      font-size: 2.4rem;
+    }
+    header h2 {
+      font-size: 2.4rem;
+      font-family: 'Georgia', serif;
+      font-weight: normal;
+      color: var(--text-dark);
+      margin: 0;
+      padding: 1.2rem 0 1.2rem 0;
+    }
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 1.7rem;
+      }
+      h2 { font-size: 1.5rem; }
+      header h2 { font-size: 1.7rem; }
+      main { padding: 1.2rem 0.5rem 1rem 0.5rem; }
+      .quotes { gap: 1.2rem; }
+      .quote-card { font-size: 1rem; padding: 1rem 0.7rem; }
+    }
+    h2 {
+      font-size: 2.3rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin: 0;
+      font-weight: bold;
+      font-family: 'Garamond', serif;
+    }
+    nav {
+      margin-top: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 1.2rem;
+      font-size: 1.05rem;
+      border-radius: 6px;
+      padding: 0.3rem 0.8rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover {
+      background: var(--terracotta);
+      color: var(--cream);
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 2rem 1rem;
+    }
+    .quotes {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 600px;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    .quote-card {
+      background: var(--cream);
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(160, 82, 45, 0.07);
+      padding: 1.3rem 1.2rem;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+      position: relative;
+    }
+    .quote-card::before {
+      content: "“";
+      font-size: 2.5rem;
+      color: var(--terracotta);
+      position: absolute;
+      left: 12px;
+      top: 8px;
+      opacity: 0.5;
+    }
+    .quote-card::after {
+      content: "”";
+      font-size: 2.5rem;
+      color: var(--terracotta);
+      position: absolute;
+      right: 12px;
+      bottom: 8px;
+      opacity: 0.5;
+    }
+    footer {
+      padding: 1rem 0;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      box-shadow: 0 -2px 8px rgba(226, 114, 91, 0.06);
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      h2 { font-size: 1.5rem; }
+      main { padding: 1.2rem 0.5rem 1rem 0.5rem; }
+      .quotes { gap: 1.2rem; }
+      .quote-card { font-size: 1rem; padding: 1rem 0.7rem; }
+    }
+    .card-caption, .timeline-desc {
+      font-style: normal;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Merriweather:400,700&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+  <header>
+    <h2>Every corner has a story.</h2>
+    <nav>
+  <a href="index.html">Home</a>
+  <a href="explore.html">Explore</a>
+  <a href="voices.html">Voices</a>
+    </nav>
+  </header>
+  <main>
+    <div class="quotes">
+
+      <div class="quote-card fade-in">
+        The first time I walked the B-Line Trail in October, it felt like the whole city was wrapped in a golden hug.
+      </div>
+      <div class="quote-card fade-in">
+        Hopscotch Coffee is where I met my best friend — over two mugs and a rainy afternoon.
+      </div>
+      <div class="quote-card fade-in">
+        Every mural downtown reminds me that Bloomington is always changing, but always home.
+      </div>
+      <div class="quote-card fade-in">
+        I love how the campus buzzes with energy, but you can always find a quiet nook to think.
+      </div>
+      <div class="quote-card fade-in">
+        Fall here smells like cinnamon and leaves, and every street feels familiar.
+      </div>
+      <div class="quote-card fade-in">
+        Bloomington taught me that small towns can hold big dreams.
+      </div>
+    </div>
+  </main>
+  <footer>
+    Created with ❤️ for Bloomington, Indiana.
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('.fade-in').forEach(function(el, i) {
+        setTimeout(function() {
+          el.classList.add('visible');
+        }, 200 + i * 200);
+      });
+    });
+  </script>
+</body>
+</html>

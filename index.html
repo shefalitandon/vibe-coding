@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Lens: Bloomington</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .bg-photo-section { position: relative; width: 100vw; min-height: 60vh; overflow: hidden; }
+    :root {
+      --terracotta: #E2725B;
+      --cream: #FFF8F3;
+      --accent: #A0522D;
+      --text-dark: #3E2C23;
+      --nav-bg: #F5E6DC;
+    }
+    body {
+      margin: 0;
+      font-family: 'Garamond', serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    header, .main-content, footer {
+      position: relative;
+      z-index: 2;
+    }
+    header {
+      background: var(--nav-bg);
+      padding: 1.5rem 0 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(226, 114, 91, 0.08);
+    }
+    header h1 {
+      font-size: 2.4rem;
+    }
+    @media (max-width: 700px) {
+      header h1 { font-size: 1.7rem; }
+    }
+    nav {
+      margin-top: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 1.5rem;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+      border-radius: 6px;
+      padding: 0.3rem 0.8rem;
+    }
+    nav a:hover {
+      background: var(--terracotta);
+      color: var(--cream);
+    }
+    .hero-image-section {
+      width: 100vw;
+      position: relative;
+      background: var(--cream);
+      overflow: hidden;
+    }
+    .hero-image-container {
+      position: relative;
+      width: 100vw;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-image {
+      width: 100vw;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 1.5s ease;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(226, 114, 91, 0.5) 0%, rgba(255, 248, 243, 0.95) 90%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-text {
+      position: relative;
+      z-index: 3;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-dark);
+      font-size: 1.25rem;
+      background: none;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(160, 82, 45, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    .hero-text-bg {
+      background: rgba(255, 248, 243, 0.85);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 2px 12px rgba(160, 82, 45, 0.07);
+      display: inline-block;
+      max-width: 90vw;
+    }
+    @media (max-width: 700px) {
+      .hero-image-container { height: 55vh; }
+      .hero-text { font-size: 1.05rem; padding: 1.2rem 0.5rem; }
+      .hero-text-bg { padding: 1rem 0.5rem; }
+    }
+    footer {
+      background: var(--nav-bg);
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      box-shadow: 0 -2px 8px rgba(226, 114, 91, 0.06);
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .timeline-section {
+      background: var(--cream);
+      padding: 3rem 1rem 2rem 1rem;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(160, 82, 45, 0.07);
+      position: relative;
+      z-index: 2;
+    }
+    .timeline-title {
+      text-align: center;
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+      font-family: 'Georgia', serif;
+    }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      margin-left: 2rem;
+    }
+    .timeline:before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--terracotta);
+      border-radius: 2px;
+      opacity: 0.3;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      position: relative;
+    }
+    .timeline-year {
+      background: var(--terracotta);
+      color: var(--cream);
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(160, 82, 45, 0.10);
+      min-width: 80px;
+      text-align: center;
+      flex-shrink: 0;
+      transition: transform 0.2s cubic-bezier(.4,1.4,.6,1.0);
+    }
+    .timeline-year:hover {
+      transform: scale(1.13);
+      z-index: 1;
+    }
+    .timeline-desc {
+      background: var(--nav-bg);
+      color: var(--text-dark);
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 8px rgba(160, 82, 45, 0.07);
+      flex: 1;
+      font-style: normal;
+    }
+    @media (max-width: 700px) {
+      .timeline-section { padding: 1.5rem 0.5rem 1rem 0.5rem; }
+      .timeline-title { font-size: 1.2rem; }
+      .timeline { margin-left: 0.5rem; gap: 1.2rem; }
+      .timeline-year { font-size: 0.95rem; padding: 0.4rem 0.7rem; min-width: 60px; }
+      .timeline-desc { font-size: 0.95rem; padding: 0.6rem 0.7rem; }
+    }
+    h1, h2, h3, h4, h5, h6, .timeline-title, .card-title, nav {
+      font-family: 'Georgia', serif;
+    }
+    .iu-section {
+      background: linear-gradient(120deg, var(--cream) 80%, var(--terracotta) 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(160, 82, 45, 0.07);
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .iu-title {
+      text-align: center;
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      font-family: 'Georgia', serif;
+    }
+    .iu-content {
+      text-align: center;
+      color: var(--text-dark);
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+    @media (max-width: 700px) {
+      .iu-section { padding: 1.2rem 0.5rem 1rem 0.5rem; }
+      .iu-title { font-size: 1.2rem; }
+      .iu-content { font-size: 1rem; }
+    }
+    .iu-full-section {
+      position: relative;
+      width: 100vw;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    .iu-full-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100vw; height: 100%;
+      background: linear-gradient(120deg, #FFF8F3 60%, #E2725B 100%);
+      z-index: 1;
+      opacity: 0.95;
+    }
+    .iu-full-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 3rem 2rem 2.5rem 2rem;
+      background: rgba(255, 248, 243, 0.98);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(160, 82, 45, 0.10);
+      text-align: center;
+    }
+    .iu-full-title {
+      font-family: 'Georgia', serif;
+      font-size: 1.7rem;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      color: #3E2C23;
+      margin-bottom: 1.2rem;
+    }
+    .iu-full-sub {
+      font-family: 'Georgia', serif;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #A0522D;
+      margin-bottom: 1.2rem;
+    }
+    @media (max-width: 700px) {
+      .iu-full-sub { font-size: 1rem; }
+    }
+    .iu-full-desc {
+      font-family: 'Garamond', serif;
+      font-size: 1.25rem;
+      color: #3E2C23;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    .iu-link {
+      color: #E2725B;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .iu-link:hover {
+      color: #A0522D;
+    }
+    @media (max-width: 900px) {
+      .iu-full-content { max-width: 98vw; padding: 2rem 0.5rem; }
+      .iu-full-title { font-size: 2rem; }
+      .iu-full-sub { font-size: 1.2rem; }
+      .iu-full-desc { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+    <header>
+      <h1>Local Lens: Bloomington</h1>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="voices.html">Voices</a>
+      </nav>
+    </header>
+    <section class="hero-image-section">
+      <div class="hero-image-container">
+  <img src="https://www.midwestliving.com/thmb/NpZ2ZzWIXbI_dSFHPNJe_YDE_WI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/102378410_Sample-Games-Indiana-University-2000-ed69f255419f4b9293a52302683858e9.jpg" alt="Bloomington Sample Gates" class="hero-image" />
+        <div class="hero-overlay"></div>
+        <div class="hero-text fade-in">
+          <div class="hero-text-bg">
+            <p>
+              Welcome to Local Lens: Bloomington, your window into the heart of our community.<br> <br>
+              Discover cozy cafes, vibrant student life, and the warmth of fall in Indiana.<br>
+              Here, every story and snapshot celebrates the spirit that makes Bloomington feel like home.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="timeline-section">
+      <h2 class="timeline-title">Bloomington Through the Years</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1818</div>
+          <div class="timeline-desc">Bloomington is founded, named for its abundance of blooms and flowers.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1820</div>
+          <div class="timeline-desc">Indiana University is established, becoming the heart of the city’s student life.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1907</div>
+          <div class="timeline-desc">The iconic Sample Gates are constructed, welcoming generations to campus.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1970s</div>
+          <div class="timeline-desc">Bloomington’s music and arts scene flourishes, with local venues and murals appearing downtown.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2011</div>
+          <div class="timeline-desc">The B-Line Trail opens, connecting neighborhoods and inviting walkers, bikers, and dreamers.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Today</div>
+          <div class="timeline-desc">Bloomington continues to grow, blending tradition, creativity, and community spirit.</div>
+        </div>
+      </div>
+    </section>
+    <section class="iu-full-section fade-in">
+      <div class="iu-full-bg"></div>
+      <div class="iu-full-content">
+        <h2 class="iu-full-title">INDIANA UNIVERSITY</h2>
+        <h3 class="iu-full-sub">The Heart of Bloomington.</h3>
+        <p class="iu-full-desc">
+          Founded in 1820, just two years after Bloomington and Monroe County, Indiana University is at the foundation of this community. The beloved, renowned Cream & Crimson school brings in over <strong>40,000 students</strong> each year, nearly doubling the city population. That youthfulness overflows into the downtown area, where students mingle with residents at the various restaurants and nightlife venues. The diversity of interests, ages, and nationalities positively impacts all aspects of the community, from the international restaurants to our annual festivals.<br><br>
+          No matter your reason for visiting campus, you'll be sure to find an abundance of inspiration on the breathtaking Indiana University grounds.
+        </p>
+      </div>
+    </section>
+    <footer>
+      Created with ❤️ for Bloomington, Indiana.
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.fade-in').forEach(function(el, i) {
+          setTimeout(function() {
+            el.classList.add('visible');
+          }, 200 + i * 200);
+        });
+      });
+    </script>
+  </body>
+</html>

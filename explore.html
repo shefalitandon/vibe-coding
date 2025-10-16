@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explore | LocalLens: Bloomington</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --terracotta: #E2725B;
+      --cream: #FFF8F3;
+      --sage: #B7C4A1;
+      --gold: #FFD89C;
+      --accent: #A0522D;
+      --text-dark: #3E2C23;
+      --nav-bg: #F5E6DC;
+    }
+    body {
+      margin: 0;
+      font-family: 'Garamond', serif;
+      background: linear-gradient(120deg, var(--cream) 60%, var(--terracotta) 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .back-nav {
+      background: var(--nav-bg);
+      padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(226, 114, 91, 0.08);
+    }
+    .back-nav a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.05rem;
+      border-radius: 6px;
+      padding: 0.3rem 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-nav a:hover {
+      background: var(--terracotta);
+      color: var(--cream);
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.5rem 1rem 2rem 1rem;
+    }
+    header {
+      background: var(--nav-bg);
+      text-align: center;
+      padding: 1.5rem 0 1rem 0;
+      box-shadow: 0 2px 8px rgba(226, 114, 91, 0.08);
+      width: 100%;
+    }
+    header h1 {
+      font-size: 2.4rem;
+    }
+    nav {
+      margin-top: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      margin: 0 1.5rem;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+      border-radius: 6px;
+      padding: 0.3rem 0.8rem;
+    }
+    nav a:hover {
+      background: var(--terracotta);
+      color: var(--cream);
+    }
+    h1, h2, h3, h4, h5, h6, .card-title, nav {
+      font-family: 'Georgia', serif;
+    }
+    h2 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      justify-items: center;
+      width: 100%;
+      max-width: 900px;
+    }
+    .card {
+      background: linear-gradient(120deg, var(--sage) 80%, var(--gold) 100%);
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(160, 82, 45, 0.08);
+      width: 270px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 1.2rem 1rem;
+      transition: box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:visited, .card:active, .card:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(160, 82, 45, 0.18);
+    }
+    .photo-placeholder {
+      width: 100%;
+      height: 200px;
+      background: repeating-linear-gradient(
+        135deg,
+        var(--cream),
+        var(--cream) 20px,
+        var(--terracotta) 22px,
+        var(--terracotta) 40px
+      );
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-style: italic;
+      opacity: 0.7;
+      letter-spacing: 0.5px;
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+    .card-caption {
+      font-size: 1.05rem;
+      text-align: center;
+      color: var(--text-dark);
+      font-style: normal;
+      line-height: 1.5;
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+    .card-caption {
+      font-size: 1.05rem;
+      text-align: center;
+      color: var(--text-dark);
+      font-style: normal;
+      line-height: 1.5;
+    }
+
+    /* Fade-in animation styles */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    footer {
+      background: var(--nav-bg);
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      box-shadow: 0 -2px 8px rgba(226, 114, 91, 0.06);
+    }
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      .card { width: 90%; max-width: 350px; }
+    }
+    @media (max-width: 700px) {
+      header h1 { font-size: 1.7rem; }
+    }
+    @media (max-width: 600px) {
+      .cards {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      h2 { font-size: 1.5rem; }
+      main { padding: 1.5rem 0.5rem 1rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Local Lens: Bloomington</h1>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="explore.html">Explore</a>
+      <a href="voices.html">Voices</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Explore Bloomington’s Cozy Corners</h2>
+    <div class="cards">
+      <a href="https://hopscotchcoffee.com/" class="card fade-in" target="_blank" rel="noopener">
+        <div class="photo-placeholder" style="background:none;padding:0;margin-bottom:1.2rem;">
+          <img src="https://static.spotapps.co/spots/37/fa5acbdae747218dd387dc1414ea70/full" alt="Hopscotch Coffee" style="width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(160,82,45,0.10);">
+        </div>
+        <div class="card-title">Hopscotch Coffee</div>
+        <div class="card-caption">Where laughter drifts louder than the music, and every mug warms more than hands.</div>
+      </a>
+      <a href="https://bloomington.in.gov/parks/trails/b-line-trail" class="card fade-in" target="_blank" rel="noopener">
+        <div class="photo-placeholder" style="background:none;padding:0;margin-bottom:1.2rem;">
+          <img src="https://assets.simpleviewinc.com/simpleview/image/upload/crm/bloomington/BLineTrail_43d19ce3-5056-a36a-0632def6b6e39fce.jpg" alt="B-Line Trail" style="width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(160,82,45,0.10);">
+        </div>
+        <div class="card-title">B-Line Trail</div>
+        <div class="card-caption">A golden path beneath autumn leaves, footsteps weaving stories through the heart of the city.</div>
+      </a>
+      <a href="https://limestonepostmagazine.com/murals-of-bloomington-photos-and-trail-map/" class="card fade-in" target="_blank" rel="noopener">
+        <div class="photo-placeholder" style="background:none;padding:0;margin-bottom:1.2rem;">
+          <img src="https://bloomington.in.gov/sites/default/files/inline-images/ABK_9700.jpg" alt="Bloomington Murals" style="width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(160,82,45,0.10);">
+        </div>
+        <div class="card-title">Murals</div>
+        <div class="card-caption">Colorful public art brightens Bloomington’s streets.</div>
+      </a>
+      <a href="https://www.in.gov/dnr/state-parks/parks-lakes/monroe-lake/" class="card fade-in" target="_blank" rel="noopener">
+        <div class="photo-placeholder" style="background:none;padding:0;margin-bottom:1.2rem;">
+          <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQef6_9YmmPvpHLNFdQ3rWH-Cyk56xr0GbKV-H8-GBi4Z0traI8f76OyrBt3Z4IY3DKl7FXPkZKkCDkJoRSH7-1YukcriwV1jlYm_feIg" alt="Monroe Lake" style="width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(160,82,45,0.10);">
+        </div>
+        <div class="card-title">Monroe Lake</div>
+        <div class="card-caption">Where water meets sky and every sunset feels like a memory in the making.</div>
+      </a>
+      <a href="https://www.idsnews.com/article/2025/04/history-iu-famous-sample-gates" class="card fade-in" target="_blank" rel="noopener">
+        <div class="photo-placeholder" style="background:none;padding:0;margin-bottom:1.2rem;">
+          <img src="https://assets.simpleviewinc.com/simpleview/image/upload/crm/southernindiana/Sample-Gates-2_09AD8E73-B26C-B960-1CDF900B06EB5091-09ad8c49ade0420_09ad9798-cdf7-7b8a-9a1b053ba530d0b4.jpg" alt="Sample Gates" style="width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(160,82,45,0.10);">
+        </div>
+        <div class="card-title">Sample Gates</div>
+        <div class="card-caption">The iconic entrance to Indiana University’s campus.</div>
+      </a>
+      <a href="https://uplandbeer.com/" class="card fade-in" target="_blank" rel="noopener">
+        <div class="photo-placeholder" style="background:none;padding:0;margin-bottom:1.2rem;">
+          <img src="https://www.gotolouisville.com/imager/assets_simpleviewinc_com/simpleview/image/upload/c_fit,w_800,h_600/crm/louisville/384569569_623650409965285_8544513650413847224_n_4441AED5-0401-7ACC-DB095838E5FBCED3-4441ad44ecb45e8_4441b89a-c611-4c4b-ef1c62214d2be771_de6e87fb6cf51aac24f471a488a0d1c5.jpg" alt="Upland Brewery" style="width:100%;height:150px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(160,82,45,0.10);">
+        </div>
+        <div class="card-title">Upland Brewing Co</div>
+        <div class="card-caption">A local favorite for craft brews, laughter, and Bloomington stories shared over a pint.</div>
+      </a>
+    </div>
+  </main>
+  <footer>
+    Created with ❤️ for Bloomington, Indiana.
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('.fade-in').forEach(function(el, i) {
+        setTimeout(function() {
+          el.classList.add('visible');
+        }, 200 + i * 200);
+      });
+    });
+  </script>
+</body>
+</html>
