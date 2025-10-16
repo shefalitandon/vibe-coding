@@ -118,6 +118,11 @@
       box-shadow: 0 2px 12px rgba(160, 82, 45, 0.07);
       display: inline-block;
       max-width: 90vw;
+      transition: transform 0.2s cubic-bezier(.4,1.4,.6,1.0);
+    }
+    .hero-text-bg:hover {
+      transform: scale(1.07);
+      z-index: 2;
     }
     @media (max-width: 700px) {
       .hero-image-container { height: 55vh; }
